@@ -5,7 +5,10 @@ const nextConfig: NextConfig = {
   images: {
     deviceSizes: [640, 852, 1704],
     imageSizes: [],
-    domains: ["localhost", String(process.env.PAYLOAD_CMS_HOST)],
+    domains: [
+      "localhost",
+      String(process.env.PAYLOAD_CMS_HOST).replace("https://", ""),
+    ],
   },
 };
 

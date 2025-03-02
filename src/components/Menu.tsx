@@ -1,12 +1,9 @@
-import type { Page } from "@/payload-types";
 import DrawerMenu from "./DrawerMenu";
 import type { Locale } from "@/const/locales";
+import { fetchPages } from "../fetch/fetchPages";
 
 export default async function Menu({ locale }: { locale: Locale }) {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_PAYLOAD_CMS_HOST}/api/pages?locale=${locale}`,
-  );
-  const result: { docs: Page[] } = await response.json();
-  const pages = result.docs.filter(({ id }) => id !== "index");
-  return <DrawerMenu pages={pages} locale={locale} />;
+  const pages = await fetchPages(locale);
+  const filteredPages = pages.filter(({ id }) => id !== "index");
+  return <DrawerMenu pages={filteredPages} locale={locale} />;
 }

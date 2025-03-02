@@ -10,9 +10,15 @@ export default async function Page({ params }: PageProps) {
 
   // validate slug and locale
 
+  const id = slug || "index";
+
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_PAYLOAD_CMS_HOST}/api/pages/${slug || "index"}?locale=${locale}`,
+    `${process.env.NEXT_PUBLIC_PAYLOAD_CMS_HOST}/api/pages/${id}?locale=${locale}`,
+    {
+      next: { tags: [`${locale}-${id}`] },
+    },
   );
+
   const result: Page = await response.json();
 
   return <PageContent {...result} />;

@@ -6,6 +6,7 @@ import { AppBar, Typography, Container } from "@mui/material";
 import Menu from "@/components/Menu";
 import Link from "next/link";
 import type { Locale } from "@/const/locales";
+import { UiString } from "@/payload-types";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700"],
@@ -19,6 +20,12 @@ export default async function RootLayout({
   params,
 }: Readonly<{ children: React.ReactNode; params: Promise<{ locale: Locale }> }>) {
   const { locale } = await params;
+
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_PAYLOAD_CMS_HOST}/api/ui-strings/app-name?locale=${locale}`,
+    { next: { revalidate: false } },
+  );
+  const result: UiString = await response.json();
 
   return (
     <html lang={locale.split("-")[0]}>
@@ -49,7 +56,7 @@ export default async function RootLayout({
                   href={`/${locale}`}
                   sx={{ textDecoration: "none", color: "inherit" }}
                 >
-                  Demo Frontend
+                  {result.text}
                 </Typography>
 
                 <Menu locale={locale} />

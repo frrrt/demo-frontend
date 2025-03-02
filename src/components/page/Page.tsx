@@ -1,3 +1,4 @@
+import type { Page } from "@/payload-types";
 import PageContent from "./PageContent";
 
 type PageProps = {
@@ -8,11 +9,9 @@ export default async function Page({ params }: PageProps) {
   const { slug } = await params;
 
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_PAYLOAD_CMS_HOST}/api/pages/${
-      slug || "index"
-    }?locale=en-US`
+    `${process.env.NEXT_PUBLIC_PAYLOAD_CMS_HOST}/api/pages/${slug || "index"}?locale=en-US`,
   );
-  const result = await response.json();
+  const result: Page = await response.json();
 
   return <PageContent {...result} />;
 }

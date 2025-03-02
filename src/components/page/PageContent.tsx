@@ -1,24 +1,25 @@
 import convertToRichText from "@/components/convertRichText";
 import ResponsiveImage from "@/components/ResponsiveImage";
+import type { Page } from "@/payload-types";
 import Head from "next/head";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function PageContent(result: any) {
+export default function PageContent({ title, image, content }: Page) {
   return (
     <>
       <Head>
-        <title>{result.title}</title>
+        <title>{title}</title>
       </Head>
-      {result.image && (
+
+      {image && typeof image !== "string" && (
         <ResponsiveImage
-          src={process.env.NEXT_PUBLIC_PAYLOAD_CMS_HOST + result.image.url}
-          alt={result.image.alt}
-          width={result.image.width}
-          height={result.image.height}
+          src={String(process.env.NEXT_PUBLIC_PAYLOAD_CMS_HOST) + image.url}
+          alt={image.alt}
+          width={image.width ?? 0}
+          height={image.height ?? 0}
         />
       )}
 
-      {convertToRichText(result.content)}
+      {content && convertToRichText(content)}
     </>
   );
 }

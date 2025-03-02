@@ -25,7 +25,7 @@ export type RichTextType = {
 export default function convertToRichText(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   children: { [k: string]: any }[],
-  firstLevel: boolean = false
+  firstLevel: boolean = false,
 ) {
   if (!children) {
     return;
@@ -91,9 +91,7 @@ export default function convertToRichText(
         );
       }
       case "blockquote": {
-        return (
-          <blockquote key={i}>{convertToRichText(node.children)}</blockquote>
-        );
+        return <blockquote key={i}>{convertToRichText(node.children)}</blockquote>;
       }
       case "ul": {
         return (

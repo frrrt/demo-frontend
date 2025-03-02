@@ -1,4 +1,5 @@
 import { LivePreviewPage } from "@/components/page/LivePreviewPage";
+import { Page } from "@/payload-types";
 import { notFound } from "next/navigation";
 
 export default async function PagePreview({
@@ -13,11 +14,9 @@ export default async function PagePreview({
   }
 
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_PAYLOAD_CMS_HOST}/api/pages/${
-      slug || "index"
-    }?locale=en-US`
+    `${process.env.NEXT_PUBLIC_PAYLOAD_CMS_HOST}/api/pages/${slug || "index"}?locale=en-US`,
   );
-  const result = await response.json();
+  const result: Page = await response.json();
 
   return <LivePreviewPage initialData={result} />;
 }

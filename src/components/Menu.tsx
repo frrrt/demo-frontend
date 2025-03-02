@@ -3,10 +3,9 @@ import Link from "next/link";
 
 export default async function Menu() {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_PAYLOAD_CMS_HOST}/api/pages?locale=en-US`
+    `${process.env.NEXT_PUBLIC_PAYLOAD_CMS_HOST}/api/pages?locale=en-US`,
   );
-  const result: { docs: { id: string; title: string }[] } =
-    await response.json();
+  const result: { docs: { id: string; title: string }[] } = await response.json();
 
   return (
     <Box sx={{ display: "flex", "& > a": { ml: 4 } }}>

@@ -37,9 +37,7 @@ const ResponsiveImage = ({
         height={height}
         sizes={`(max-width: ${breakpoints.sm}px) calc(100vw - ${
           spacing * 6
-        }px), (max-width: ${breakpoints.md}px) calc(100vw - ${
-          spacing * 8
-        }px), 852px`}
+        }px), (max-width: ${breakpoints.md}px) calc(100vw - ${spacing * 8}px), 852px`}
         priority={priority}
         quality={quality}
       />

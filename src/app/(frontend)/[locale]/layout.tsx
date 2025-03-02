@@ -2,11 +2,12 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import { Roboto } from "next/font/google";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../../../theme";
-import { AppBar, Typography, Container } from "@mui/material";
+import { AppBar, Typography, Container, Box } from "@mui/material";
 import Menu from "@/components/Menu";
 import Link from "next/link";
 import type { Locale } from "@/const/locales";
 import { UiString } from "@/payload-types";
+import ToggleLanguageButton from "@/components/ToggleLanguageButton";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700"],
@@ -58,8 +59,10 @@ export default async function RootLayout({
                 >
                   {result.text}
                 </Typography>
-
-                <Menu locale={locale} />
+                <Box>
+                  <ToggleLanguageButton />
+                  <Menu locale={locale} />
+                </Box>
               </Container>
             </AppBar>
 

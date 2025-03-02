@@ -25,7 +25,13 @@ export default function DrawerMenu({ pages, locale }: { pages: Page[]; locale: L
 
   return (
     <>
-      <IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleDrawer(true)}>
+      <IconButton
+        edge="start"
+        color="inherit"
+        aria-label="menu"
+        onClick={toggleDrawer(true)}
+        sx={{ ml: 2 }}
+      >
         <MenuIcon />
       </IconButton>
 

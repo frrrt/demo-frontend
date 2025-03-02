@@ -1,10 +1,11 @@
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import { Roboto } from "next/font/google";
 import { ThemeProvider } from "@mui/material/styles";
-import theme from "../../theme";
+import theme from "../../../theme";
 import { AppBar, Typography, Container } from "@mui/material";
 import Menu from "@/components/Menu";
 import Link from "next/link";
+import type { Locale } from "@/const/locales";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700"],
@@ -13,9 +14,14 @@ const roboto = Roboto({
   variable: "--font-roboto",
 });
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default async function RootLayout({
+  children,
+  params,
+}: Readonly<{ children: React.ReactNode; params: Promise<{ locale: Locale }> }>) {
+  const { locale } = await params;
+
   return (
-    <html lang="en">
+    <html lang={locale.split("-")[0]}>
       <body className={roboto.variable} style={{ margin: 0 }}>
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
@@ -40,13 +46,13 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                 <Typography
                   variant="h6"
                   component={Link}
-                  href="/"
+                  href={`/${locale}`}
                   sx={{ textDecoration: "none", color: "inherit" }}
                 >
                   Demo Frontend
                 </Typography>
 
-                <Menu />
+                <Menu locale={locale} />
               </Container>
             </AppBar>
 

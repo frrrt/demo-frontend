@@ -13,9 +13,10 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Page } from "@/payload-types";
+import type { Page } from "@/payload-types";
+import type { Locale } from "@/const/locales";
 
-export default function DrawerMenu({ pages }: { pages: Page[] }) {
+export default function DrawerMenu({ pages, locale }: { pages: Page[]; locale: Locale }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDrawer = (open: boolean) => () => {
@@ -38,7 +39,7 @@ export default function DrawerMenu({ pages }: { pages: Page[] }) {
           <List>
             {pages.map((page) => (
               <ListItem key={page.id} disablePadding>
-                <ListItemButton component={Link} href={`/${page.id}`}>
+                <ListItemButton component={Link} href={`/${locale}/${page.id}`}>
                   <ListItemText primary={<Typography variant="body1">{page.title}</Typography>} />
                 </ListItemButton>
               </ListItem>

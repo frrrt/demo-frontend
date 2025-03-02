@@ -10,6 +10,15 @@ const nextConfig: NextConfig = {
       String(process.env.NEXT_PUBLIC_PAYLOAD_CMS_HOST).replace("https://", ""),
     ],
   },
+  redirects: async () => {
+    return [
+      {
+        source: "/",
+        destination: "/en-US",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

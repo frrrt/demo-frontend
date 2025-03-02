@@ -1,7 +1,7 @@
 "use client";
 
 import PageContent from "@/components/page/PageContent";
-import { Page } from "@/payload-types";
+import type { Page } from "@/payload-types";
 import { useLivePreview } from "@payloadcms/live-preview-react";
 
 // Fetch the page in a server component, pass it to the client component, then thread it through the hook

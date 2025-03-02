@@ -20,7 +20,8 @@
     "@payloadcms/live-preview-react": "^3.25.0",
     "next": "15.2.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "valibot": "1.0.0-rc.3"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

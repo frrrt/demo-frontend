@@ -6,7 +6,10 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "sync:types": "tsx ./scripts/sync-types.ts",
+    "prettier": "prettier --write **/*.{js,jsx,ts,tsx}",
+    "prettier:check": "prettier --check **/*.{js,jsx,ts,tsx}"
   },
   "dependencies": {
     "@emotion/cache": "^11.14.0",
@@ -25,6 +28,8 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.2.0",
+    "prettier": "^3.5.2",
+    "tsx": "^4.19.3",
     "typescript": "^5"
   }
 }

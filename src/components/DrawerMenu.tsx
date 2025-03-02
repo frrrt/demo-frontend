@@ -1,0 +1,51 @@
+"use client";
+
+import { useState } from "react";
+import {
+  Box,
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Typography,
+} from "@mui/material";
+import Link from "next/link";
+import MenuIcon from "@mui/icons-material/Menu";
+import { Page } from "@/payload-types";
+
+export default function DrawerMenu({ pages }: { pages: Page[] }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDrawer = (open: boolean) => () => {
+    setIsOpen(open);
+  };
+
+  return (
+    <>
+      <IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleDrawer(true)}>
+        <MenuIcon />
+      </IconButton>
+
+      <Drawer anchor="right" open={isOpen} onClose={toggleDrawer(false)}>
+        <Box
+          sx={{ width: 250 }}
+          role="presentation"
+          onClick={toggleDrawer(false)}
+          onKeyDown={toggleDrawer(false)}
+        >
+          <List>
+            {pages.map((page) => (
+              <ListItem key={page.id} disablePadding>
+                <ListItemButton component={Link} href={`/${page.id}`}>
+                  <ListItemText primary={<Typography variant="body1">{page.title}</Typography>} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+        </Box>
+      </Drawer>
+    </>
+  );
+}

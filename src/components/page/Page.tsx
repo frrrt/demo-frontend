@@ -1,21 +1,15 @@
 import type { Page } from "@/payload-types";
 import PageContent from "./PageContent";
+import { parse } from "valibot";
+import { pageParamsSchema } from "@/validation/pageParamsSchema";
 
-type PageProps = {
-  params: Promise<{ slug: string; locale: string }>;
-};
-
-export default async function Page({ params }: PageProps) {
-  const { slug, locale } = await params;
-
-  // validate slug and locale
-
-  const id = slug || "index";
+export default async function Page({ params }: { params: Promise<unknown> }) {
+  const { slug, locale } = parse(pageParamsSchema, await params);
 
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_PAYLOAD_CMS_HOST}/api/pages/${id}?locale=${locale}`,
+    `${process.env.NEXT_PUBLIC_PAYLOAD_CMS_HOST}/api/pages/${slug}?locale=${locale}`,
     {
-      next: { tags: [`${locale}-${id}`] },
+      next: { tags: [`${locale}-${slug}`] },
     },
   );
 

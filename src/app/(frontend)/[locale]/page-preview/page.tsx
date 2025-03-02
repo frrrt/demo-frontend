@@ -1,23 +1,36 @@
 import { LivePreviewPage } from "@/components/page/LivePreviewPage";
-import { Locale } from "@/const/locales";
 import { Page } from "@/payload-types";
+import { localeSchema } from "@/validation/localeSchema";
+import { slugSchema } from "@/validation/slugSchema";
 import { notFound } from "next/navigation";
+import { object, parse, string } from "valibot";
+
+const pagePreviewSchema = object({
+  token: string(),
+  slug: slugSchema,
+  locale: localeSchema,
+});
 
 export default async function PagePreview({
+  params,
   searchParams,
 }: {
-  searchParams: Promise<{ token: string; slug: string; locale: Locale }>;
+  params: Record<string, unknown>;
+  searchParams: Record<string, unknown>;
 }) {
-  const { token, slug, locale } = await searchParams;
+  const resolvedParams = {
+    ...(await params),
+    ...(await searchParams),
+  };
+
+  const { token, slug, locale } = parse(pagePreviewSchema, resolvedParams);
 
   if (token !== process.env.PREVIEW_TOKEN) {
     notFound();
   }
 
-  // validate token, slug and locale
-
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_PAYLOAD_CMS_HOST}/api/pages/${slug || "index"}?locale=${locale}`,
+    `${process.env.NEXT_PUBLIC_PAYLOAD_CMS_HOST}/api/pages/${slug}?locale=${locale}`,
   );
   const result: Page = await response.json();
 

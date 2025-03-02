@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
     imageSizes: [],
     domains: [
       "localhost",
-      String(process.env.PAYLOAD_CMS_HOST).replace("https://", ""),
+      String(process.env.NEXT_PUBLIC_PAYLOAD_CMS_HOST).replace("https://", ""),
     ],
   },
 };

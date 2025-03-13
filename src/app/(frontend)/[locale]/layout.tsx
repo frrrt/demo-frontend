@@ -8,6 +8,7 @@ import Link from "next/link";
 import type { Locale } from "@/const/locales";
 import { UiString } from "@/payload-types";
 import ToggleLanguageButton from "@/components/ToggleLanguageButton";
+import fetchUiStrings from "@/fetch/fetchUistrings";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700"],
@@ -22,11 +23,7 @@ export default async function RootLayout({
 }: Readonly<{ children: React.ReactNode; params: Promise<{ locale: Locale }> }>) {
   const { locale } = await params;
 
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_PAYLOAD_CMS_HOST}/api/ui-strings/app-name?locale=${locale}`,
-    { next: { revalidate: false } },
-  );
-  const result: UiString = await response.json();
+  const uistrings = await fetchUiStrings(["app-name"], locale);
 
   return (
     <html lang={locale.split("-")[0]}>
@@ -57,7 +54,7 @@ export default async function RootLayout({
                   href={`/${locale}`}
                   sx={{ textDecoration: "none", color: "inherit" }}
                 >
-                  {result.text}
+                  {uistrings["app-name"]}
                 </Typography>
                 <Box>
                   <ToggleLanguageButton />

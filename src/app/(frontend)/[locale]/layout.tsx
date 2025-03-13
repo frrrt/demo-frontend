@@ -6,7 +6,6 @@ import { AppBar, Typography, Container, Box } from "@mui/material";
 import Menu from "@/components/Menu";
 import Link from "next/link";
 import type { Locale } from "@/const/locales";
-import { UiString } from "@/payload-types";
 import ToggleLanguageButton from "@/components/ToggleLanguageButton";
 import fetchUiStrings from "@/fetch/fetchUistrings";
 

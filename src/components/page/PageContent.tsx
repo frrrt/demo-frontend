@@ -2,8 +2,14 @@ import convertToRichText from "@/components/convertRichText";
 import ResponsiveImage from "@/components/ResponsiveImage";
 import type { Page } from "@/payload-types";
 import Head from "next/head";
+import CommentForm from "./CommentForm";
 
-export default function PageContent({ title, image, content }: Page) {
+export default async function PageContent({
+  title,
+  image,
+  content,
+  uistrings,
+}: Page & { uistrings: Record<string, string> }) {
   return (
     <>
       <Head>
@@ -20,6 +26,8 @@ export default function PageContent({ title, image, content }: Page) {
       )}
 
       {content && convertToRichText(content)}
+
+      <CommentForm uistrings={uistrings} />
     </>
   );
 }

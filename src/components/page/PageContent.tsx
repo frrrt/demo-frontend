@@ -4,7 +4,7 @@ import type { Page } from "@/payload-types";
 import Head from "next/head";
 import CommentForm from "./CommentForm";
 
-export default async function PageContent({
+export default function PageContent({
   title,
   image,
   content,

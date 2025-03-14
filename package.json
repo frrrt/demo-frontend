@@ -9,7 +9,8 @@
     "lint": "next lint",
     "sync:types": "tsx ./scripts/sync-types.ts",
     "prettier": "prettier --write **/*.{js,jsx,ts,tsx}",
-    "prettier:check": "prettier --check **/*.{js,jsx,ts,tsx}"
+    "prettier:check": "prettier --check **/*.{js,jsx,ts,tsx}",
+    "check:types": "tsc --noEmit"
   },
   "dependencies": {
     "@emotion/cache": "^11.14.0",

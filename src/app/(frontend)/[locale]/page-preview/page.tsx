@@ -1,4 +1,5 @@
 import { LivePreviewPage } from "@/components/page/LivePreviewPage";
+import fetchUiStrings from "@/fetch/fetchUistrings";
 import { Page } from "@/payload-types";
 import { localeSchema } from "@/validation/localeSchema";
 import { slugSchema } from "@/validation/slugSchema";
@@ -34,5 +35,17 @@ export default async function PagePreview({
   );
   const result: Page = await response.json();
 
-  return <LivePreviewPage initialData={result} />;
+  const uistrings = await fetchUiStrings(
+    [
+      "comment-form-title",
+      "comment-form-button",
+      "comment-form-email-helper",
+      "comment-form-email",
+      "comment-form-name",
+      "comment-form-comment",
+    ],
+    locale,
+  );
+
+  return <LivePreviewPage initialData={result} uistrings={uistrings} />;
 }

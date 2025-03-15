@@ -5,9 +5,10 @@ import { parse } from "valibot";
 export async function generateMetadata({ params }: { params: Promise<unknown> }) {
   const { slug, locale } = parse(pageParamsSchema, await params);
 
-  const { title } = await fetchPage(slug, locale);
+  const { title, metaDescription } = await fetchPage(slug, locale);
 
   return {
     title,
+    metaDescription,
   };
 }

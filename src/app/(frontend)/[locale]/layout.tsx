@@ -22,7 +22,7 @@ export default async function RootLayout({
 }: Readonly<{ children: React.ReactNode; params: Promise<{ locale: Locale }> }>) {
   const { locale } = await params;
 
-  const uistrings = await fetchUiStrings(["app-name"], locale);
+  const uistrings = await fetchUiStrings(["nav-app-name", "nav-toggle-language"], locale);
 
   return (
     <html lang={locale.split("-")[0]}>
@@ -53,10 +53,12 @@ export default async function RootLayout({
                   href={`/${locale}`}
                   sx={{ textDecoration: "none", color: "inherit" }}
                 >
-                  {uistrings["app-name"]}
+                  {uistrings["nav-app-name"]}
                 </Typography>
                 <Box>
-                  <ToggleLanguageButton />
+                  <ToggleLanguageButton
+                    uistrings={{ "nav-toggle-language": uistrings["nav-toggle-language"] }}
+                  />
                   <Menu locale={locale} />
                 </Box>
               </Container>

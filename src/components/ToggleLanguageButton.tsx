@@ -7,7 +7,7 @@ import Link from "next/link";
 import { LOCALES } from "@/const/locales";
 import { usePathname } from "next/navigation";
 
-export default function ToggleLanguageButton() {
+export default function ToggleLanguageButton({ uistrings }: { uistrings: Record<string, string> }) {
   const pathname = usePathname();
   const [anchorEl, setAnchorEl] = useState<Element>();
   const open = Boolean(anchorEl);
@@ -22,6 +22,7 @@ export default function ToggleLanguageButton() {
         style={{ width: 40, height: 40, color: "text.primary" }}
         size="large"
         onClick={(event) => setAnchorEl(event.currentTarget)}
+        aria-label={uistrings["nav-toggle-language"]}
       >
         <TranslateRoundedIcon />
       </IconButton>

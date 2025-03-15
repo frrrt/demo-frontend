@@ -24,7 +24,7 @@ export default function CommentForm({ uistrings, onSubmit }: CommentFormProps) {
 
   return (
     <Paper elevation={2} sx={{ p: 3, mb: 4, mt: 4 }}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant="h6" component="div" gutterBottom>
         {uistrings["comment-form-title"]}
       </Typography>
 

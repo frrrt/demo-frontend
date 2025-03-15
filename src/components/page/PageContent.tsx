@@ -16,6 +16,7 @@ export default function PageContent({
           alt={image.alt}
           width={image.width ?? 0}
           height={image.height ?? 0}
+          priority
         />
       )}
 

@@ -1,10 +1,10 @@
 import { LivePreviewPage } from "@/components/page/LivePreviewPage";
 import fetchUiStrings from "@/fetch/fetchUistrings";
-import { Page } from "@/payload-types";
 import { localeSchema } from "@/validation/localeSchema";
 import { slugSchema } from "@/validation/slugSchema";
 import { notFound } from "next/navigation";
 import { object, parse, string } from "valibot";
+import { fetchPage } from "../../../../fetch/fetchPage";
 
 const pagePreviewSchema = object({
   token: string(),
@@ -30,10 +30,7 @@ export default async function PagePreview({
     notFound();
   }
 
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_PAYLOAD_CMS_HOST}/api/pages/${slug}?locale=${locale}`,
-  );
-  const result: Page = await response.json();
+  const page = await fetchPage(slug, locale);
 
   const uistrings = await fetchUiStrings(
     [
@@ -47,5 +44,5 @@ export default async function PagePreview({
     locale,
   );
 
-  return <LivePreviewPage initialData={result} uistrings={uistrings} />;
+  return <LivePreviewPage initialData={page} uistrings={uistrings} />;
 }

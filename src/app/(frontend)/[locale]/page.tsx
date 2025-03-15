@@ -8,3 +8,5 @@ export async function generateStaticParams() {
 }
 
 export default Page;
+
+export { generateMetadata } from "@/components/page/generateMetadata";

@@ -19,7 +19,7 @@ export default function ToggleLanguageButton({ uistrings }: { uistrings: Record<
   return (
     <Box component="span" displayPrint="none">
       <IconButton
-        style={{ width: 40, height: 40, color: "text.primary" }}
+        style={{ width: 40, height: 40 }}
         size="large"
         onClick={(event) => setAnchorEl(event.currentTarget)}
         aria-label={uistrings["nav-toggle-language"]}
@@ -42,6 +42,7 @@ export default function ToggleLanguageButton({ uistrings }: { uistrings: Record<
         {LOCALES.map((locale) => (
           <MuiLink
             key={locale}
+            color="secondary.dark"
             component={Link}
             href={"/" + locale + "/" + pathname?.split("/").slice(2).join("/")}
             prefetch

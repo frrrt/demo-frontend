@@ -9,11 +9,7 @@ interface CommentFormProps {
   onSubmit?: (comment: string) => void;
 }
 
-export default function CommentForm({
-  uistrings,
-  userAvatar = "/api/placeholder/40/40",
-  onSubmit,
-}: CommentFormProps) {
+export default function CommentForm({ uistrings, onSubmit }: CommentFormProps) {
   const [comment, setComment] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -58,7 +54,7 @@ export default function CommentForm({
           </Box>
 
           <Box sx={{ display: "flex", gap: 2 }}>
-            <Avatar src={userAvatar} alt="User" sx={{ display: { xs: "none", sm: "flex" }, mt: 1 }}>
+            <Avatar alt="User" sx={{ display: { xs: "none", sm: "flex" }, mt: 1 }}>
               {name ? name.charAt(0).toUpperCase() : "U"}
             </Avatar>
             <TextField

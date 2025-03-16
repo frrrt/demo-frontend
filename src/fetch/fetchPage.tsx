@@ -4,7 +4,7 @@ export async function fetchPage(slug: string, locale: string): Promise<Page> {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_PAYLOAD_CMS_HOST}/api/pages/${slug}?locale=${locale}`,
     {
-      next: { tags: [`${locale}-${slug}`] },
+      next: { tags: [`${locale}-page-${slug}`] },
     },
   );
 

@@ -1,4 +1,3 @@
-import type { Page } from "@/payload-types";
 import PageContent from "./PageContent";
 import { parse } from "valibot";
 import { pageParamsSchema } from "@/validation/pageParamsSchema";

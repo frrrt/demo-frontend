@@ -1,10 +1,10 @@
 import type { Locale } from "@/const/locales";
-import type { Page } from "@/payload-types";
+import { Page, validatePages } from "@/schemas/PageSchema";
 
 export async function fetchPages(locale: Locale): Promise<Page[]> {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_PAYLOAD_CMS_HOST}/api/pages?locale=${locale}`,
   );
 
-  return (await response.json()).docs;
+  return validatePages(await response.json()).docs;
 }

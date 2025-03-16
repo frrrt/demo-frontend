@@ -1,7 +1,7 @@
 import convertToRichText from "@/components/convertRichText";
 import ResponsiveImage from "@/components/ResponsiveImage";
-import type { Page } from "@/payload-types";
 import CommentForm from "./CommentForm";
+import { Page } from "@/schemas/PageSchema";
 
 export default function PageContent({
   image,
@@ -10,17 +10,17 @@ export default function PageContent({
 }: Page & { uistrings: Record<string, string> }) {
   return (
     <>
-      {image && typeof image !== "string" && (
+      {image && (
         <ResponsiveImage
           src={String(process.env.NEXT_PUBLIC_PAYLOAD_CMS_HOST) + image.url}
-          alt={image.alt}
+          alt={image.alt ?? ""}
           width={image.width ?? 0}
           height={image.height ?? 0}
           priority
         />
       )}
 
-      {content && convertToRichText(content)}
+      {content && convertToRichText(Array.isArray(content) ? content : [content])}
 
       <CommentForm uistrings={uistrings} />
     </>

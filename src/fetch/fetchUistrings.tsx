@@ -1,6 +1,6 @@
 import { stringify } from "qs-esm";
-import { UiString } from "@/payload-types";
 import { generateUistringCacheTags } from "./generateUistringCacheTags";
+import { UiString, validateUiStrings } from "@/schemas/UiStringSchema";
 
 export default async function fetchUiStrings(ids: string[], locale: string) {
   const tags = generateUistringCacheTags(ids);
@@ -22,12 +22,10 @@ export default async function fetchUiStrings(ids: string[], locale: string) {
     { next: { tags, revalidate: false } },
   );
 
-  const data: { docs: UiString[] } = await response.json();
+  const uistrings = validateUiStrings(await response.json());
 
-  const uiStringLookup = data.docs.reduce((lookup: Record<string, string>, item: UiString) => {
+  return uistrings.docs.reduce((lookup: Record<string, string>, item: UiString) => {
     lookup[item.id] = item.text ?? "";
     return lookup;
   }, {});
-
-  return uiStringLookup;
 }

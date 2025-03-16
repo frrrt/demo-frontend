@@ -1,7 +1,7 @@
 "use client";
 
 import PageContent from "@/components/page/PageContent";
-import type { Page } from "@/payload-types";
+import { Page } from "@/schemas/PageSchema";
 import { useLivePreview } from "@payloadcms/live-preview-react";
 
 export function LivePreviewPage({

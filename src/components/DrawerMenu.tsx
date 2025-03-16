@@ -13,8 +13,8 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import MenuIcon from "@mui/icons-material/Menu";
-import type { Page } from "@/payload-types";
 import type { Locale } from "@/const/locales";
+import { Page } from "@/schemas/PageSchema";
 
 export default function DrawerMenu({ pages, locale }: { pages: Page[]; locale: Locale }) {
   const [isOpen, setIsOpen] = useState(false);

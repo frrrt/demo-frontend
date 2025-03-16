@@ -32,6 +32,10 @@ export default async function PagePreview({
 
   const page = await fetchPage(slug, locale);
 
+  if (!page) {
+    notFound();
+  }
+
   const uistrings = await fetchUiStrings(
     [
       "comment-form-title",

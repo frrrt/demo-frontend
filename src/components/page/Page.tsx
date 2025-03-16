@@ -3,11 +3,16 @@ import { parse } from "valibot";
 import { pageParamsSchema } from "@/validation/pageParamsSchema";
 import fetchUiStrings from "@/fetch/fetchUistrings";
 import { fetchPage } from "@/fetch/fetchPage";
+import { notFound } from "next/navigation";
 
 export default async function Page({ params }: { params: Promise<unknown> }) {
   const { slug, locale } = parse(pageParamsSchema, await params);
 
   const result = await fetchPage(slug, locale);
+
+  if (!result) {
+    notFound();
+  }
 
   const uistrings = await fetchUiStrings(
     [

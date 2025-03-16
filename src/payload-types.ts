@@ -148,7 +148,7 @@ export interface User {
  */
 export interface Media {
   id: string;
-  alt: string;
+  alt?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -168,6 +168,7 @@ export interface Media {
 export interface Page {
   id: string;
   title?: string | null;
+  metaDescription?: string | null;
   image?: (string | null) | Media;
   content?:
     | {
@@ -186,7 +187,7 @@ export interface UiString {
   id: string;
   text?: string | null;
   description?: string | null;
-  "context-image"?: (string | null) | UiStringMedia;
+  contextImage?: (string | null) | UiStringMedia;
   updatedAt: string;
   createdAt: string;
 }
@@ -318,6 +319,7 @@ export interface MediaSelect<T extends boolean = true> {
 export interface PagesSelect<T extends boolean = true> {
   id?: T;
   title?: T;
+  metaDescription?: T;
   image?: T;
   content?: T;
   updatedAt?: T;
@@ -332,7 +334,7 @@ export interface UiStringsSelect<T extends boolean = true> {
   id?: T;
   text?: T;
   description?: T;
-  "context-image"?: T;
+  contextImage?: T;
   updatedAt?: T;
   createdAt?: T;
 }

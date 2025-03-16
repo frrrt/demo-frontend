@@ -29,7 +29,7 @@ export async function POST(request: Request) {
       );
     }
 
-    console.log("Error revalidating", error);
+    console.error("Error revalidating", error);
     return Response.json({ message: "Error revalidating" }, { status: 500 });
   }
 }

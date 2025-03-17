@@ -20,11 +20,53 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: "var(--font-roboto)",
+    htmlFontSize: 14,
   },
   breakpoints: {
     values: breakpoints,
   },
+  components: {
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          wordBreak: "break-word",
+          wordWrap: "break-word",
+          hyphens: "auto",
+        },
+      },
+    },
+  },
   spacing,
 });
+
+theme.typography.h1 = {
+  fontSize: "2.75rem",
+  fontWeight: 400,
+  lineHeight: 1.2,
+};
+
+theme.typography.h2 = {
+  fontSize: "2.25rem",
+  fontWeight: 400,
+  lineHeight: 1.3,
+};
+
+theme.typography.h3 = {
+  fontSize: "2rem",
+  fontWeight: 400,
+  lineHeight: 1.3,
+};
+
+theme.typography.h4 = {
+  fontSize: "1.5rem",
+  fontWeight: 400,
+  lineHeight: 1.4,
+};
+
+theme.typography.subtitle2 = {
+  fontSize: "1rem",
+  fontWeight: 400,
+  lineHeight: 1.4,
+};
 
 export default theme;

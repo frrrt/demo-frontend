@@ -26,7 +26,8 @@ export default async function RootLayout({
 
   return (
     <html lang={locale.split("-")[0]}>
-      <body className={roboto.variable} style={{ margin: 0 }}>
+      {/* always have a scrollbar to limit vertical content shift */}
+      <body className={roboto.variable} style={{ margin: 0, overflowY: "scroll" }}>
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
             <AppBar

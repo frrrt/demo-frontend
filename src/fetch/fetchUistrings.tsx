@@ -12,6 +12,10 @@ export default async function fetchUiStrings(ids: string[], locale: string) {
           in: ids,
         },
       },
+      select: {
+        id: true,
+        text: true,
+      },
       locale,
     },
     { addQueryPrefix: true },

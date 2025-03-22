@@ -57,9 +57,7 @@ export default async function RootLayout({
                   {uistrings["nav-app-name"]}
                 </Typography>
                 <Box>
-                  <ToggleLanguageButton
-                    uistrings={{ "nav-toggle-language": uistrings["nav-toggle-language"] }}
-                  />
+                  <ToggleLanguageButton uistrings={uistrings} />
                   <Menu locale={locale} />
                 </Box>
               </Container>

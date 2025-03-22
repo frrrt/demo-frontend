@@ -5,24 +5,21 @@ import { UiString, validateUiStrings } from "@/schemas/UiStringSchema";
 export default async function fetchUiStrings(ids: string[], locale: string) {
   const tags = generateUistringCacheTags(ids);
 
-  const stringifiedQuery = stringify(
-    {
-      where: {
-        id: {
-          in: ids,
-        },
+  const stringifiedQuery = stringify({
+    where: {
+      id: {
+        in: ids,
       },
-      select: {
-        id: true,
-        text: true,
-      },
-      locale,
     },
-    { addQueryPrefix: true },
-  );
+    select: {
+      id: true,
+      text: true,
+    },
+    locale,
+  });
 
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_PAYLOAD_CMS_HOST}/api/ui-strings${stringifiedQuery}`,
+    `${process.env.NEXT_PUBLIC_PAYLOAD_CMS_HOST}/api/ui-strings?${stringifiedQuery}`,
     { next: { tags, revalidate: false } },
   );
 

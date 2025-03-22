@@ -5,7 +5,7 @@ const sourcePath: string = path.join("..", "demo-cms", "src", "payload-types.ts"
 const targetPath: string = path.join("src", "payload-types.ts");
 
 /**
- * Type Syncing Utility
+ * Type Syncing Utility (AI generated script)
  *
  * This script synchronizes the payload-types.ts file from the demo-cms repository
  * to the demo-frontend repository while making necessary modifications.
@@ -23,8 +23,7 @@ const targetPath: string = path.join("src", "payload-types.ts");
  * - Carefully loads the project's Prettier configuration to maintain consistent formatting
  *
  * Usage:
- * Run with tsx: `tsx sync-types.ts`
- * Or add it to your package.json scripts: "sync-types": "tsx sync-types.ts"
+ * Run: `pnpm sync:schemas`
  */
 try {
   fs.copyFileSync(sourcePath, targetPath);
@@ -32,11 +31,18 @@ try {
 
   let content = fs.readFileSync(targetPath, "utf8");
 
-  const removePattern = `declare module "payload" {
+  // This is the formatting created by payload
+  const removePattern = `declare module 'payload' {
+  export interface GeneratedTypes extends Config {}
+}`;
+
+  // This is the formatting created by prettier
+  const removePattern2 = `declare module "payload" {
   export interface GeneratedTypes extends Config {}
 }`;
 
   content = content.replace(removePattern, "");
+  content = content.replace(removePattern2, "");
 
   fs.writeFileSync(targetPath, content);
   console.log("Removed payload module declaration");

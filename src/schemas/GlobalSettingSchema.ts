@@ -6,8 +6,9 @@ import * as v from "valibot";
 
 export const GlobalSettingSchema = v.object({
   id: v.string(),
-  chatgptModel: v.nullish(v.string()),
-  askChatgptPrompt: v.nullish(v.string()),
+  chatgptModel: v.string(),
+  askChatgptPrompt: v.string(),
+  altTextPrompt: v.string(),
   updatedAt: v.nullish(v.string()),
   createdAt: v.nullish(v.string()),
 });

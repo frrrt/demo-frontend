@@ -5,7 +5,7 @@ const sourceDir: string = path.join("..", "demo-cms", "src", "schemas");
 const targetDir: string = path.join("src", "schemas");
 
 /**
- * Schema Syncing Utility
+ * Schema Syncing Utility (AI generated script)
  *
  * This script synchronizes the schemas directory from another repository
  * to the current repository.
@@ -22,63 +22,49 @@ const targetDir: string = path.join("src", "schemas");
  * - Uses the Prettier API directly to ensure consistent formatting
  *
  * Usage:
- * Run with tsx: `tsx sync-schemas.ts`
- * Or add it to your package.json scripts: "sync:schemas": "tsx sync-schemas.ts"
+ * Run: `pnpm sync:schemas`
  */
 
-// Helper function to copy a directory recursively
 function copyDirectoryRecursively(source: string, target: string): void {
-  // Remove the schemas directory if it exists, then create it fresh
   if (fs.existsSync(target)) {
     fs.rmSync(target, { recursive: true, force: true });
   }
   fs.mkdirSync(target, { recursive: true });
 
-  // Read all items in the source directory
   const items = fs.readdirSync(source);
 
-  // Process each item
   for (const item of items) {
     const sourcePath = path.join(source, item);
     const targetPath = path.join(target, item);
 
-    // Check if the item is a directory or file
     const stats = fs.statSync(sourcePath);
 
     if (stats.isDirectory()) {
-      // Recursively copy subdirectories
       copyDirectoryRecursively(sourcePath, targetPath);
     } else {
-      // Copy files
       fs.copyFileSync(sourcePath, targetPath);
       console.log(`Copied: ${sourcePath} → ${targetPath}`);
     }
   }
 }
 
-// Main function
 async function syncSchemas() {
   try {
-    // Check if source directory exists
     if (!fs.existsSync(sourceDir)) {
       throw new Error(`Source directory not found: ${sourceDir}`);
     }
 
-    // Remove target directory if it exists
     if (fs.existsSync(targetDir)) {
       fs.rmSync(targetDir, { recursive: true, force: true });
       console.log(`Removed existing directory: ${targetDir}`);
     }
 
-    // Create fresh target directory
     fs.mkdirSync(targetDir, { recursive: true });
     console.log(`Created fresh directory: ${targetDir}`);
 
-    // Copy all schemas recursively
     copyDirectoryRecursively(sourceDir, targetDir);
     console.log("All schemas copied successfully");
 
-    // Format all files with Prettier
     try {
       const prettier = await import("prettier");
       const prettierConfig =
@@ -87,7 +73,6 @@ async function syncSchemas() {
           editorconfig: true,
         })) || {};
 
-      // Function to format files recursively
       async function formatFilesRecursively(directory: string): Promise<void> {
         const items = fs.readdirSync(directory);
 
@@ -133,5 +118,4 @@ async function syncSchemas() {
   }
 }
 
-// Execute the sync function
 syncSchemas();

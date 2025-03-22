@@ -393,11 +393,15 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface Setting {
   id: string;
-  chatgptModel?: string | null;
+  chatgptModel: string;
   /**
    * Available placeholder: {locale}, {context}, {term}
    */
-  askChatgptPrompt?: string | null;
+  askChatgptPrompt: string;
+  /**
+   * Available placeholder: {locale}
+   */
+  altTextPrompt: string;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -408,6 +412,7 @@ export interface Setting {
 export interface SettingsSelect<T extends boolean = true> {
   chatgptModel?: T;
   askChatgptPrompt?: T;
+  altTextPrompt?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

@@ -7,10 +7,8 @@ const RevalidationSchema = v.object({
 });
 
 export async function POST(request: Request) {
-  const body = await request.json();
-
   try {
-    const { token, tags } = v.parse(RevalidationSchema, body);
+    const { token, tags } = v.parse(RevalidationSchema, await request.json());
 
     if (token !== process.env.REVALIDATION_TOKEN) {
       return Response.json({ message: "Invalid token" }, { status: 401 });

@@ -1,5 +1,5 @@
 import type { Locale } from "@/const/locales";
-import { Page, validatePages } from "@/schemas/PageSchema";
+import { Page, validatePages } from "@/schemas/generated/PageSchema";
 import { stringify } from "qs-esm";
 
 export async function fetchPages(locale: Locale): Promise<Page[]> {

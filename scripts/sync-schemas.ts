@@ -2,7 +2,7 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 
 const sourceDir: string = path.join("..", "demo-cms", "src", "schemas");
-const targetDir: string = path.join("src", "schemas");
+const targetDir: string = path.join("src", "schemas", "generated");
 
 /**
  * Schema Syncing Utility (AI generated script)

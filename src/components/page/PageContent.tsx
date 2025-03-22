@@ -1,7 +1,7 @@
 import convertToRichText from "@/components/convertRichText";
 import ResponsiveImage from "@/components/ResponsiveImage";
 import CommentForm from "./CommentForm";
-import { Page } from "@/schemas/PageSchema";
+import { Page } from "@/schemas/generated/PageSchema";
 
 export default function PageContent({
   image,

@@ -1,5 +1,7 @@
 "use client";
 import { createTheme } from "@mui/material/styles";
+import { breakpoints } from "@/styles/breakpoints";
+import { spacing } from "@/styles/spacing";
 
 const theme = createTheme({
   cssVariables: true,
@@ -22,7 +24,7 @@ const theme = createTheme({
     htmlFontSize: 14,
   },
   breakpoints: {
-    values: { xs: 0, sm: 600, md: 900, lg: 1200, xl: 1536 },
+    values: breakpoints,
   },
   components: {
     MuiTypography: {
@@ -35,7 +37,7 @@ const theme = createTheme({
       },
     },
   },
-  spacing: 8,
+  spacing,
 });
 
 theme.typography.h1 = {

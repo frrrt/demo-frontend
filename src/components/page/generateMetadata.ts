@@ -1,5 +1,5 @@
 import { fetchPage } from "@/fetch/fetchPage";
-import { pageParamsSchema } from "@/validation/pageParamsSchema";
+import { pageParamsSchema } from "@/schemas/pageParamsSchema";
 import { parse } from "valibot";
 
 export async function generateMetadata({ params }: { params: Promise<unknown> }) {

@@ -1,7 +1,7 @@
 import { LivePreviewPage } from "@/components/page/LivePreviewPage";
 import fetchUiStrings from "@/fetch/fetchUistrings";
-import { localeSchema } from "@/validation/localeSchema";
-import { slugSchema } from "@/validation/slugSchema";
+import { localeSchema } from "@/schemas/localeSchema";
+import { slugSchema } from "@/schemas/slugSchema";
 import { notFound } from "next/navigation";
 import { object, parse, string } from "valibot";
 import { fetchPage } from "../../../../fetch/fetchPage";

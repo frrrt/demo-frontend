@@ -1,6 +1,6 @@
 import { stringify } from "qs-esm";
 import { generateUistringCacheTags } from "./generateUistringCacheTags";
-import { UiString, validateUiStrings } from "@/schemas/UiStringSchema";
+import { UiString, validateUiStrings } from "@/schemas/generated/UiStringSchema";
 
 export default async function fetchUiStrings(ids: string[], locale: string) {
   const tags = generateUistringCacheTags(ids);

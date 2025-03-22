@@ -1,4 +1,4 @@
-import { Page, validatePage } from "@/schemas/PageSchema";
+import { Page, validatePage } from "@/schemas/generated/PageSchema";
 
 export async function fetchPage(slug: string, locale: string): Promise<Page | undefined> {
   const url = new URL(`/api/pages/${slug}`, process.env.NEXT_PUBLIC_PAYLOAD_CMS_HOST);

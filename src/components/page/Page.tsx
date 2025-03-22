@@ -1,6 +1,6 @@
 import PageContent from "./PageContent";
 import { parse } from "valibot";
-import { pageParamsSchema } from "@/validation/pageParamsSchema";
+import { pageParamsSchema } from "@/schemas/pageParamsSchema";
 import fetchUiStrings from "@/fetch/fetchUistrings";
 import { fetchPage } from "@/fetch/fetchPage";
 import { notFound } from "next/navigation";

@@ -1,5 +1,5 @@
 import { object } from "valibot";
-import { localeSchema } from "./localeSchema";
+import { localeSchema } from "../schemas/localeSchema";
 import { slugSchema } from "./slugSchema";
 
 export const pageParamsSchema = object({

@@ -1,7 +1,8 @@
 import React from "react";
 import Image from "next/image";
 import { Box, SxProps, Theme } from "@mui/material";
-import { breakpoints, spacing } from "@/styles/consts";
+import { breakpoints } from "@/styles/breakpoints";
+import { spacing } from "@/styles/spacing";
 
 const ResponsiveImage = ({
   src,

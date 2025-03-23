@@ -13,7 +13,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: String(process.env.NEXT_PUBLIC_PAYLOAD_CMS_HOST),
+        hostname: String(process.env.NEXT_PUBLIC_PAYLOAD_CMS_HOST).replace("https://", ""),
       },
     ],
   },

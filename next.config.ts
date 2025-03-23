@@ -5,9 +5,17 @@ const nextConfig: NextConfig = {
   images: {
     deviceSizes: [640, 852, 1704],
     imageSizes: [],
-    domains: [
-      "localhost",
-      String(process.env.NEXT_PUBLIC_PAYLOAD_CMS_HOST).replace("https://", ""),
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "localhost",
+        port: "4000",
+      },
+      {
+        protocol: "https",
+        hostname: String(process.env.NEXT_PUBLIC_PAYLOAD_CMS_HOST),
+        port: "80",
+      },
     ],
   },
   redirects: async () => {

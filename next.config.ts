@@ -14,7 +14,6 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: String(process.env.NEXT_PUBLIC_PAYLOAD_CMS_HOST),
-        port: "80",
       },
     ],
   },

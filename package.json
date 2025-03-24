@@ -16,15 +16,15 @@
   "dependencies": {
     "@emotion/cache": "^11.14.0",
     "@emotion/styled": "^11.14.0",
-    "@mui/icons-material": "^6.4.6",
-    "@mui/material": "^6.4.6",
+    "@mui/icons-material": "^6.4.8",
+    "@mui/material": "^6.4.8",
     "@mui/material-nextjs": "^6.4.3",
-    "@payloadcms/live-preview-react": "^3.25.0",
-    "next": "15.2.0",
+    "@payloadcms/live-preview-react": "^3.30.0",
+    "next": "15.2.3",
     "qs-esm": "^7.0.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "valibot": "1.0.0-rc.3"
+    "valibot": "1.0.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -32,8 +32,8 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "15.2.0",
-    "prettier": "^3.5.2",
+    "eslint-config-next": "15.2.3",
+    "prettier": "^3.5.3",
     "tsx": "^4.19.3",
     "typescript": "^5"
   }

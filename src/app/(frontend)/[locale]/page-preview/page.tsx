@@ -32,7 +32,7 @@ export default async function PagePreview({
 
   // This forwards an empty page object if the fetch is a 404, this is usefull
   // if it is only a draft during live preview for example.
-  const page = (await fetchPage(slug, locale)) ?? { id: "none" };
+  const page = (await fetchPage(slug, locale)) ?? { id: "none", createdAt: "", updatedAt: "" };
 
   const uistrings = await fetchUiStrings(
     [

@@ -1,31 +1,27 @@
-import { stringify } from "qs-esm";
 import { generateUistringCacheTags } from "./generateUistringCacheTags";
-import { UiString, validateUiStrings } from "@/schemas/generated/UiStringSchema";
+import { queryCollection } from "./query";
 
 export default async function fetchUiStrings(ids: string[], locale: string) {
-  const tags = generateUistringCacheTags(ids);
-
-  const stringifiedQuery = stringify({
-    where: {
-      id: {
-        in: ids,
+  const uistrings = await queryCollection(
+    "ui-strings",
+    {
+      where: {
+        id: {
+          in: ids,
+        },
       },
+      select: {
+        id: true,
+        text: true,
+      },
+      locale,
     },
-    select: {
-      id: true,
-      text: true,
+    {
+      next: { tags: generateUistringCacheTags(ids), revalidate: false },
     },
-    locale,
-  });
-
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_PAYLOAD_CMS_HOST}/api/ui-strings?${stringifiedQuery}`,
-    { next: { tags, revalidate: false } },
   );
 
-  const uistrings = validateUiStrings(await response.json());
-
-  return uistrings.docs.reduce((lookup: Record<string, string>, item: UiString) => {
+  return uistrings.reduce<Record<string, string>>((lookup, item) => {
     lookup[item.id] = item.text ?? "";
     return lookup;
   }, {});

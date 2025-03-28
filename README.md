@@ -17,3 +17,4 @@ This is a demo project to show some cool features of NextJS and MUI and how it i
 - **i18n Integration:** see `src/components/ToggleLanguageButton.tsx` and `src/app/(frontend)/[locale]/`
 - **Auto generated Valibot Schemas:** see `src/schemas/`
 - **MUI Theme Customization:** see `src/theme.ts`
+- **Integrated CMS query utilities:** see `src/fetch/query.ts` and usage: `src/fetch/fetchPage.ts`

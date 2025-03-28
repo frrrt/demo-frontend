@@ -8,7 +8,6 @@
     "start": "next start",
     "lint": "next lint",
     "sync:types": "tsx ./scripts/sync-types.ts",
-    "sync:schemas": "tsx ./scripts/sync-schemas.ts",
     "prettier": "prettier --write **/*.{js,jsx,ts,tsx}",
     "prettier:check": "prettier --check **/*.{js,jsx,ts,tsx}",
     "check:types": "tsc --noEmit"

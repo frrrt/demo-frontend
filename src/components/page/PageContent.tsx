@@ -7,7 +7,7 @@ export default function PageContent({
   image,
   content,
   uistrings,
-}: Page & { uistrings: Record<string, string> }) {
+}: Pick<Page, "image" | "content"> & { uistrings: Record<string, string> }) {
   return (
     <>
       {image && typeof image !== "string" && (

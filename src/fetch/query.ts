@@ -1,44 +1,75 @@
 /**
- * Universal Payload CMS Query Function
+ * Universal Payload CMS Query Utility
  *
- * This module provides a typed approach to querying Payload CMS through its REST API.
- * It leverages TypeScript's advanced type system to provide full type safety for:
- * - Collection and global names
- * - Field selection (select)
- * - Query filtering (where) with support for dot notation
- * - Response data structure with precise typing for selected fields
+ * This module provides a type-safe approach to querying Payload CMS through its REST API
+ * with support for field selection, filtering, and relationship population.
  *
- * The main benefits are:
- * 1. Type-safe querying with autocomplete for collection/global names and their fields
- * 2. Runtime validation of response data against expected types
- * 3. Support for Next.js cache tags and other fetch options
- * 4. Support for dot notation in where clauses (e.g., "nested.field")
- * 5. Result types that accurately reflect selected fields
+ * Key Features:
+ * - Type-safe querying with autocomplete for collection/global names and fields
+ * - Select specific fields to reduce response payload size
+ * - Type-safe population of relationships with field-level control
+ * - Support for field filtering via "where" clauses with dot notation
+ * - Integration with Next.js cache tags and revalidation
  *
- * Example usage:
+ * Important Behaviors:
  *
- * // Query all published pages with selected fields
- * const pages = await queryCollection('pages', {
- *   where: {
- *     id: { equals: 'test123' },
- *     'nested.field': { equals: 'value' }
- *   },
- *   select: { id: true, title: true, content: true },
- *   locale: 'en-US',
+ * 1. `select` vs `populate` parameter differences:
+ *    - `select` specifies which fields to include in the response using FIELD names
+ *    - `populate` controls which related documents to populate and which fields to include
+ *      using COLLECTION names (the value of relationTo in your schema)
+ *
+ * 2. When using `populate`, a default depth of 1 is set if not specified
+ *
+ * Examples:
+ *
+ * Basic query with field selection:
+ * ```
+ * const pages = await queryCollection("pages", {
+ *   select: { title: true, slug: true },
+ *   where: { _status: { equals: "published" } }
+ * });
+ * ```
+ *
+ * Query with relationship population:
+ * ```
+ * const page = await queryById("pages", "home", {
+ *   populate: {
+ *     // "authors" is the collection name from relationTo, not the field name
+ *     authors: {
+ *       name: true,
+ *       email: true
+ *     },
+ *     // "media" is the collection for Upload fields
+ *     media: {
+ *       url: true,
+ *       alt: true
+ *     }
+ *   }
+ * });
+ * ```
+ *
+ * Combined select and populate:
+ * ```
+ * const posts = await queryCollection("posts", {
+ *   select: { title: true, content: true, author: true },
+ *   populate: {
+ *     authors: {
+ *       name: true,
+ *       avatar: true
+ *     }
+ *   }
+ * });
+ * ```
+ *
+ * With Next.js cache options:
+ * ```
+ * const globalSettings = await queryGlobal("settings", {
+ *   select: { siteTitle: true, theme: true }
  * }, {
- *   next: { tags: ['pages', 'en-US-pages'] }
+ *   next: { tags: ["settings"], revalidate: 60 }
  * });
- *
- * // Query a global with field selection
- * const settings = await queryGlobal('settings', {
- *   select: { chatgptModel: true }
- * });
- *
- * For more information on Payload's REST API and query parameters:
- * - https://payloadcms.com/docs/rest-api/overview
- * - https://payloadcms.com/docs/queries/select
+ * ```
  */
-
 import { Config } from "@/payload-types";
 import { stringify } from "qs-esm";
 
@@ -49,6 +80,10 @@ export type GlobalType<T extends PayloadGlobal> = Config["globals"][T];
 
 type BooleanRecord<T> = { [K in keyof T]?: T[K] extends object ? BooleanRecord<T[K]> : boolean };
 export type SelectType<T> = BooleanRecord<T>;
+
+export type CollectionPopulateType = {
+  [C in PayloadCollection]?: SelectType<CollectionType<C>> | boolean;
+};
 
 type PickSelectedProps<T, S extends SelectType<T>> = {
   [K in keyof S as S[K] extends true ? K : never]: K extends keyof T ? T[K] : never;
@@ -100,6 +135,7 @@ export interface CollectionQueryParams<
 > extends BaseQueryParams {
   where?: WhereClause<CollectionType<T>>;
   select?: S;
+  populate?: CollectionPopulateType;
 }
 
 export interface GlobalQueryParams<
@@ -107,6 +143,7 @@ export interface GlobalQueryParams<
   S extends SelectType<GlobalType<T>> | undefined = undefined,
 > extends BaseQueryParams {
   select?: S;
+  populate?: CollectionPopulateType;
 }
 
 export type DocsResponse<T> = {
@@ -153,6 +190,10 @@ export async function queryCollection<
 ): Promise<
   CollectionType<T>[] | PickSelectedProps<CollectionType<T>, S & SelectType<CollectionType<T>>>[]
 > {
+  if (params.populate && params.depth === undefined) {
+    params.depth = 1; // Default shallow population
+  }
+
   const stringifiedQuery = stringify(params);
   const url = `${process.env.NEXT_PUBLIC_PAYLOAD_CMS_HOST}/api/${collection}${stringifiedQuery ? `?${stringifiedQuery}` : ""}`;
 
@@ -184,6 +225,10 @@ export async function queryGlobal<
   params: GlobalQueryParams<T, S> = {} as GlobalQueryParams<T, S>,
   options: NextFetchOptions = {},
 ): Promise<GlobalType<T> | PickSelectedProps<GlobalType<T>, S & SelectType<GlobalType<T>>>> {
+  if (params.populate && params.depth === undefined) {
+    params.depth = 1; // Default shallow population
+  }
+
   const stringifiedQuery = stringify(params);
   const url = `${process.env.NEXT_PUBLIC_PAYLOAD_CMS_HOST}/api/globals/${global}${stringifiedQuery ? `?${stringifiedQuery}` : ""}`;
 
@@ -228,6 +273,10 @@ export async function queryById<
   | PickSelectedProps<CollectionType<T>, S & SelectType<CollectionType<T>>>
   | undefined
 > {
+  if (params.populate && params.depth === undefined) {
+    params.depth = 1;
+  }
+
   const stringifiedQuery = stringify(params);
   const url = `${process.env.NEXT_PUBLIC_PAYLOAD_CMS_HOST}/api/${collection}/${id}${stringifiedQuery ? `?${stringifiedQuery}` : ""}`;
 

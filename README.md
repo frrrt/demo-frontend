@@ -12,10 +12,9 @@ This is a demo project to show some cool features of NextJS and MUI and how it i
 - **Page Revalidation:** see `src/app/api/revalidate/route.ts`
 - **Server Component Example:** see `src/components/page/Page.tsx` and `src/components/Menu.tsx`
 - **Mixed Component (used as RSC and Client Component):** see `src/components/page/PageContent.tsx`
-- **Maping Rich Text to MUI components:** see `src/components/convertRichText.tsx`
+- **Maping Rich Text to MUI components:** see `src/components/convertToRichText.tsx`
 - **Responsive Image Component:** see `src/components/ResponsiveImage.tsx`
 - **i18n Integration:** see `src/components/ToggleLanguageButton.tsx` and `src/app/(frontend)/[locale]/`
-- **Auto generated Valibot Schemas:** see `src/schemas/`
 - **MUI Theme Customization:** see `src/theme.ts`
 - **Integrated CMS query utilities:** see `src/fetch/query.ts` and usage: `src/fetch/fetchPage.ts`
 - **E2E Types with structural typing magic:** see `src/components/Menu.tsx`

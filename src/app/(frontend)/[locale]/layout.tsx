@@ -1,13 +1,13 @@
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import { Roboto } from "next/font/google";
 import { ThemeProvider } from "@mui/material/styles";
-import theme from "../../../theme";
 import { AppBar, Typography, Container, Box } from "@mui/material";
 import Menu from "@/components/Menu";
 import Link from "next/link";
 import type { Locale } from "@/const/locales";
 import ToggleLanguageButton from "@/components/ToggleLanguageButton";
 import fetchUiStrings from "@/fetch/fetchUistrings";
+import theme from "@/theme";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700"],

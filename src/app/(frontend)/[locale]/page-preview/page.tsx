@@ -1,10 +1,10 @@
 import { LivePreviewPage } from "@/components/page/LivePreviewPage";
+import { fetchPage } from "@/fetch/fetchPage";
 import fetchUiStrings from "@/fetch/fetchUistrings";
 import { localeSchema } from "@/schemas/localeSchema";
 import { slugSchema } from "@/schemas/slugSchema";
 import { notFound } from "next/navigation";
 import { object, parse, string } from "valibot";
-import { fetchPage } from "../../../../fetch/fetchPage";
 
 const pagePreviewSchema = object({
   token: string(),
@@ -30,7 +30,7 @@ export default async function PagePreview({
     notFound();
   }
 
-  // This forwards an empty page object if the fetch is a 404, this is usefull
+  // This forwards an "empty" page object if the fetch is a 404, this is usefull
   // if it is only a draft during live preview for example.
   const page = (await fetchPage(slug, locale)) ?? { id: "none", image: "test", content: [{}] };
 

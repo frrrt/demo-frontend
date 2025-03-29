@@ -1,6 +1,6 @@
-import DrawerMenu from "./DrawerMenu";
+import { fetchPages } from "@/fetch/fetchPages";
 import type { Locale } from "@/const/locales";
-import { fetchPages } from "../fetch/fetchPages";
+import DrawerMenu from "./DrawerMenu";
 
 export default async function Menu({ locale }: { locale: Locale }) {
   // Automatically gets type

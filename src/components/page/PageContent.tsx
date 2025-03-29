@@ -1,4 +1,4 @@
-import convertToRichText from "@/components/convertRichText";
+import convertToRichText from "@/components/convertToRichText";
 import ResponsiveImage from "@/components/ResponsiveImage";
 import CommentForm from "./CommentForm";
 import { Page } from "@/payload-types";
@@ -20,7 +20,7 @@ export default function PageContent({
         />
       )}
 
-      {content && convertToRichText(Array.isArray(content) ? content : [content])}
+      {content && convertToRichText(Array.isArray(content) ? content : [content], true)}
 
       <CommentForm uistrings={uistrings} />
     </>

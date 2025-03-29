@@ -9,6 +9,7 @@ export async function fetchPages(locale: string) {
         id: true,
         title: true,
       },
+      sort: "-createdAt",
     },
     {
       next: { tags: [`${locale}-pages`] },

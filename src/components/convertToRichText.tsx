@@ -95,19 +95,23 @@ export default function convertToRichText(
       }
       case "ul": {
         return (
-          <Box key={i} component="ul" sx={{ m: 0, pl: 4, mb: 1 }}>
+          <Box key={i} component="ul" sx={{ m: 0, pl: 4, mb: 1, mt: 0 }}>
             {convertToRichText(node.children)}
           </Box>
         );
       }
       case "ol": {
-        return <ol key={i}>{convertToRichText(node.children)}</ol>;
+        return (
+          <Box key={i} component="ol" sx={{ mt: 0 }}>
+            {convertToRichText(node.children)}
+          </Box>
+        );
       }
       case "li": {
         return (
-          <Box key={i} component="li" sx={{ pt: 0.25 }}>
+          <Typography key={i} component="li" sx={{ pt: 0.25 }}>
             {convertToRichText(node.children)}
-          </Box>
+          </Typography>
         );
       }
       case "indent": {

@@ -18,3 +18,4 @@ This is a demo project to show some cool features of NextJS and MUI and how it i
 - **Auto generated Valibot Schemas:** see `src/schemas/`
 - **MUI Theme Customization:** see `src/theme.ts`
 - **Integrated CMS query utilities:** see `src/fetch/query.ts` and usage: `src/fetch/fetchPage.ts`
+- **E2E Types with structural typing magic:** see `src/components/Menu.tsx`

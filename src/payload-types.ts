@@ -199,15 +199,13 @@ export interface User {
  */
 export interface Page {
   id: string;
-  title?: string | null;
+  title: string;
   author?: (string | null) | Author;
-  metaDescription?: string | null;
+  metaDescription: string;
   image?: (string | null) | Media;
-  content?:
-    | {
-        [k: string]: unknown;
-      }[]
-    | null;
+  content: {
+    [k: string]: unknown;
+  }[];
   updatedAt: string;
   createdAt: string;
   _status?: ("draft" | "published") | null;

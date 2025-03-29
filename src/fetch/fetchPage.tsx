@@ -9,7 +9,6 @@ export async function fetchPage(slug: string, locale: string) {
       select: {
         image: true,
         title: true,
-        slug: true,
         content: true,
         metaDescription: true,
       },

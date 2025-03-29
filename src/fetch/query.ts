@@ -78,24 +78,24 @@ export type PayloadGlobal = keyof Config["globals"];
 export type CollectionType<T extends PayloadCollection> = Config["collections"][T];
 export type GlobalType<T extends PayloadGlobal> = Config["globals"][T];
 
-type BooleanRecord<T> = { [K in keyof T]?: T[K] extends object ? BooleanRecord<T[K]> : boolean };
+type BooleanRecord<T> = {
+  [K in keyof T]?: T[K] extends unknown[]
+    ? boolean
+    : T[K] extends object
+      ? BooleanRecord<T[K]>
+      : boolean;
+};
+
 export type SelectType<T> = BooleanRecord<T>;
 
 export type CollectionPopulateType = {
   [C in PayloadCollection]?: SelectType<CollectionType<C>> | boolean;
 };
 
-type PickSelectedProps<T, S extends SelectType<T>> = {
-  [K in keyof S as S[K] extends true ? K : never]: K extends keyof T ? T[K] : never;
-} & {
-  [K in keyof S as S[K] extends BooleanRecord<unknown> ? K : never]: K extends keyof T
-    ? T[K] extends object
-      ? S[K] extends BooleanRecord<T[K]>
-        ? PickSelectedProps<T[K], S[K]>
-        : never
-      : never
-    : never;
-};
+type SelectKeysOf<T, S> = {
+  [K in keyof S]: S[K] extends true ? K : never;
+}[keyof S] &
+  keyof T;
 
 type SimpleCondition<T> =
   | { equals?: T | null }
@@ -172,7 +172,7 @@ export async function queryCollection<
   collection: T,
   params: CollectionQueryParams<T, S> & { select: S },
   options?: NextFetchOptions,
-): Promise<PickSelectedProps<CollectionType<T>, S>[]>;
+): Promise<Pick<CollectionType<T>, SelectKeysOf<CollectionType<T>, S> | "id">[]>;
 
 export async function queryCollection<T extends PayloadCollection>(
   collection: T,
@@ -187,11 +187,9 @@ export async function queryCollection<
   collection: T,
   params: CollectionQueryParams<T, S> = {} as CollectionQueryParams<T, S>,
   options: NextFetchOptions = {},
-): Promise<
-  CollectionType<T>[] | PickSelectedProps<CollectionType<T>, S & SelectType<CollectionType<T>>>[]
-> {
+): Promise<unknown[]> {
   if (params.populate && params.depth === undefined) {
-    params.depth = 1; // Default shallow population
+    params.depth = 1;
   }
 
   const stringifiedQuery = stringify(params);
@@ -209,7 +207,7 @@ export async function queryGlobal<T extends PayloadGlobal, S extends SelectType<
   global: T,
   params: GlobalQueryParams<T, S> & { select: S },
   options?: NextFetchOptions,
-): Promise<PickSelectedProps<GlobalType<T>, S>>;
+): Promise<Pick<GlobalType<T>, SelectKeysOf<GlobalType<T>, S> | "id">>;
 
 export async function queryGlobal<T extends PayloadGlobal>(
   global: T,
@@ -224,9 +222,9 @@ export async function queryGlobal<
   global: T,
   params: GlobalQueryParams<T, S> = {} as GlobalQueryParams<T, S>,
   options: NextFetchOptions = {},
-): Promise<GlobalType<T> | PickSelectedProps<GlobalType<T>, S & SelectType<GlobalType<T>>>> {
+): Promise<unknown> {
   if (params.populate && params.depth === undefined) {
-    params.depth = 1; // Default shallow population
+    params.depth = 1;
   }
 
   const stringifiedQuery = stringify(params);
@@ -248,7 +246,7 @@ export async function queryById<
   id: string,
   params: Omit<CollectionQueryParams<T, S>, "where"> & { select: S },
   options?: NextFetchOptions,
-): Promise<PickSelectedProps<CollectionType<T>, S> | undefined>;
+): Promise<Pick<CollectionType<T>, SelectKeysOf<CollectionType<T>, S> | "id"> | undefined>;
 
 export async function queryById<T extends PayloadCollection>(
   collection: T,
@@ -268,11 +266,7 @@ export async function queryById<
     "where"
   >,
   options: NextFetchOptions = {},
-): Promise<
-  | CollectionType<T>
-  | PickSelectedProps<CollectionType<T>, S & SelectType<CollectionType<T>>>
-  | undefined
-> {
+): Promise<unknown | undefined> {
   if (params.populate && params.depth === undefined) {
     params.depth = 1;
   }

@@ -14,9 +14,14 @@ import {
 import Link from "next/link";
 import MenuIcon from "@mui/icons-material/Menu";
 import type { Locale } from "@/const/locales";
-import { Page } from "@/payload-types";
 
-export default function DrawerMenu({ pages, locale }: { pages: Page[]; locale: Locale }) {
+export default function DrawerMenu({
+  pages,
+  locale,
+}: {
+  pages: { id: string; title: string }[];
+  locale: Locale;
+}) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDrawer = (open: boolean) => () => {

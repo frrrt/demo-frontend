@@ -24,7 +24,5 @@ export async function fetchPage(slug: string, locale: string) {
     { next: { tags: [`${locale}-page-${slug}`] } },
   );
 
-  console.log("response", response);
-
   return response;
 }

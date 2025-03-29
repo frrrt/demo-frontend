@@ -12,7 +12,7 @@ export async function fetchPages(locale: string) {
       sort: "-createdAt",
     },
     {
-      next: { tags: [`${locale}-pages`] },
+      next: { tags: [`pages`] },
     },
   );
 }

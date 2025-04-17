@@ -16,7 +16,6 @@ const nextConfig: NextConfig = {
         hostname: String(process.env.NEXT_PUBLIC_PAYLOAD_CMS_HOST).replace("https://", ""),
       },
     ],
-    minimumCacheTTL: 2678400,
   },
   redirects: async () => {
     return [

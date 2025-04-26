@@ -8,7 +8,7 @@ export function LivePreviewPage({
   initialData,
   uistrings,
 }: {
-  initialData: Pick<Page, "image" | "content">;
+  initialData: Pick<Page, "image" | "content" | "id">;
   uistrings: Record<string, string>;
 }) {
   const { data } = useLivePreview({

@@ -71,6 +71,7 @@ export interface Config {
     users: User;
     media: Media;
     pages: Page;
+    comments: Comment;
     "ui-strings": UiString;
     "ui-string-media": UiStringMedia;
     "payload-locked-documents": PayloadLockedDocument;
@@ -83,6 +84,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
+    comments: CommentsSelect<false> | CommentsSelect<true>;
     "ui-strings": UiStringsSelect<false> | UiStringsSelect<true>;
     "ui-string-media": UiStringMediaSelect<false> | UiStringMediaSelect<true>;
     "payload-locked-documents":
@@ -212,6 +214,39 @@ export interface Page {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "comments".
+ */
+export interface Comment {
+  id: string;
+  /**
+   * The page this comment is associated with
+   */
+  page: string | Page;
+  /**
+   * The name of the comment author
+   */
+  authorName: string;
+  /**
+   * The email address of the comment author
+   */
+  authorEmail: string;
+  /**
+   * The comment text
+   */
+  commentText: string;
+  /**
+   * Check this box to flag harmful content that should not be published
+   */
+  isHarmful?: boolean | null;
+  /**
+   * Explain why this comment was flagged as harmful
+   */
+  harmfulReason?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "ui-strings".
  */
 export interface UiString {
@@ -262,6 +297,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: "pages";
         value: string | Page;
+      } | null)
+    | ({
+        relationTo: "comments";
+        value: string | Comment;
       } | null)
     | ({
         relationTo: "ui-strings";
@@ -379,6 +418,20 @@ export interface PagesSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "comments_select".
+ */
+export interface CommentsSelect<T extends boolean = true> {
+  page?: T;
+  authorName?: T;
+  authorEmail?: T;
+  commentText?: T;
+  isHarmful?: T;
+  harmfulReason?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

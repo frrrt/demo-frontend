@@ -1,14 +1,8 @@
 import convertToRichText from "@/components/convertToRichText";
 import ResponsiveImage from "@/components/ResponsiveImage";
-import CommentForm from "./CommentForm";
 import { Page } from "@/payload-types";
 
-export default function PageContent({
-  id,
-  image,
-  content,
-  uistrings,
-}: Pick<Page, "id" | "image" | "content"> & { uistrings: Record<string, string> }) {
+export default function PageContent({ image, content }: Pick<Page, "image" | "content">) {
   return (
     <>
       {image && typeof image !== "string" && (
@@ -22,8 +16,6 @@ export default function PageContent({
       )}
 
       {content && convertToRichText(Array.isArray(content) ? content : [content], true)}
-
-      <CommentForm uistrings={uistrings} pageId={id} />
     </>
   );
 }

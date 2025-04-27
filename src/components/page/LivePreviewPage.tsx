@@ -6,10 +6,8 @@ import { useLivePreview } from "@payloadcms/live-preview-react";
 
 export function LivePreviewPage({
   initialData,
-  uistrings,
 }: {
   initialData: Pick<Page, "image" | "content" | "id">;
-  uistrings: Record<string, string>;
 }) {
   const { data } = useLivePreview({
     initialData,
@@ -17,5 +15,5 @@ export function LivePreviewPage({
     depth: 2,
   });
 
-  return <PageContent {...data} uistrings={uistrings} />;
+  return <PageContent {...data} />;
 }

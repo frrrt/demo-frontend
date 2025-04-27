@@ -1,3 +1,5 @@
+import CommentForm from "@/components/page/CommentForm";
+import CommentList from "@/components/page/CommentList";
 import { LivePreviewPage } from "@/components/page/LivePreviewPage";
 import { fetchPage } from "@/fetch/fetchPage";
 import fetchUiStrings from "@/fetch/fetchUistrings";
@@ -46,5 +48,11 @@ export default async function PagePreview({
     locale,
   );
 
-  return <LivePreviewPage initialData={page} uistrings={uistrings} />;
+  return (
+    <>
+      <LivePreviewPage initialData={page} />
+      <CommentList pageId={page.id} />
+      <CommentForm uistrings={uistrings} pageId={page.id} />
+    </>
+  );
 }

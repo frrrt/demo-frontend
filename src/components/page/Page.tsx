@@ -4,13 +4,15 @@ import { pageParamsSchema } from "@/schemas/pageParamsSchema";
 import fetchUiStrings from "@/fetch/fetchUistrings";
 import { fetchPage } from "@/fetch/fetchPage";
 import { notFound } from "next/navigation";
+import CommentList from "./CommentList";
+import CommentForm from "./CommentForm";
 
 export default async function Page({ params }: { params: Promise<unknown> }) {
   const { slug, locale } = parse(pageParamsSchema, await params);
 
-  const result = await fetchPage(slug, locale);
+  const pageData = await fetchPage(slug, locale);
 
-  if (!result) {
+  if (!pageData) {
     notFound();
   }
 
@@ -26,5 +28,11 @@ export default async function Page({ params }: { params: Promise<unknown> }) {
     locale,
   );
 
-  return <PageContent {...result} uistrings={uistrings} />;
+  return (
+    <>
+      <PageContent {...pageData} />
+      <CommentList pageId={slug} />
+      <CommentForm uistrings={uistrings} pageId={slug} />
+    </>
+  );
 }

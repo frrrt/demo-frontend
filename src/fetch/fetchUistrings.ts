@@ -15,6 +15,7 @@ export default async function fetchUiStrings(ids: string[], locale: string) {
         text: true,
       },
       locale,
+      limit: ids.length,
     },
     {
       next: { tags: generateUistringCacheTags(ids), revalidate: false },

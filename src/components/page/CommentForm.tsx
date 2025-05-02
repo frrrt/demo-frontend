@@ -1,24 +1,25 @@
 "use client";
 
 import { Box, TextField, Paper, Stack, Typography } from "@mui/material";
-import createComment from "@/mutate/createComment";
-import { Page } from "@/payload-types";
 import { useActionState } from "react";
 import { SendButton } from "./SendButton";
 import Notification, { CREATE_COMMENT_SUCCESS } from "./Notification";
-import type { Locale } from "@/const/locales";
 
 export default function CommentForm({
   uistrings,
-  pageId,
-  locale,
+  createCommentAction,
 }: {
   uistrings: Record<string, string>;
-  pageId: Page["id"];
-  locale: Locale;
+  createCommentAction: (
+    prevState: {
+      message: string;
+    },
+    formData: FormData,
+  ) => Promise<{
+    message: string;
+  }>;
 }) {
-  const enhancedCreateComment = createComment.bind(null, pageId).bind(null, locale);
-  const [state, formAction] = useActionState(enhancedCreateComment, { message: "" });
+  const [state, formAction] = useActionState(createCommentAction, { message: "" });
 
   return (
     <Paper elevation={2} sx={{ p: 3, mb: 4, mt: 4 }}>
@@ -30,15 +31,17 @@ export default function CommentForm({
         <>
           {state.message === CREATE_COMMENT_SUCCESS ? (
             <Notification
+              uistrings={uistrings}
               severity="success"
-              title="Comment Received"
-              message="We received your comment, it will be published after moderation."
+              title={uistrings["comment-form-success-title"]}
+              message={uistrings["comment-form-success-message"]}
             />
           ) : (
             <Notification
+              uistrings={uistrings}
               severity="error"
-              title="Error Occurred"
-              message="We could not process your comment. Please try again later."
+              title={uistrings["comment-form-error-title"]}
+              message={uistrings["comment-form-error-message"]}
             />
           )}
         </>

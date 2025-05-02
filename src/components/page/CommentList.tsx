@@ -4,6 +4,7 @@ import { AccessTime as AccessTimeIcon } from "@mui/icons-material";
 import { format } from "date-fns";
 import { fetchComments } from "@/fetch/fetchComments";
 import type { Locale } from "@/const/locales";
+import fetchUiStrings from "@/fetch/fetchUistrings";
 
 const getInitials = (name: string) =>
   name
@@ -14,13 +15,15 @@ const getInitials = (name: string) =>
     .toUpperCase();
 
 export default async function CommentList({ pageId, locale }: { pageId: string; locale: Locale }) {
+  const uistrings = await fetchUiStrings(["comment-list-no-comments"], locale);
+
   const comments = await fetchComments(pageId, locale);
 
   if (comments.length === 0) {
     return (
       <Box sx={{ my: 4 }}>
         <Typography variant="body2" color="text.secondary" textAlign="center">
-          No comments yet. Be the first to comment!
+          {uistrings["comment-list-no-comments"]}
         </Typography>
       </Box>
     );

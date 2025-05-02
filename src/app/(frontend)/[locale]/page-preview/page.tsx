@@ -1,8 +1,7 @@
-import CommentForm from "@/components/page/CommentForm";
+import CommentFormWrapper from "@/components/page/CommentFormWrapper";
 import CommentList from "@/components/page/CommentList";
 import { LivePreviewPage } from "@/components/page/LivePreviewPage";
 import { fetchPage } from "@/fetch/fetchPage";
-import fetchUiStrings from "@/fetch/fetchUistrings";
 import { localeSchema } from "@/schemas/localeSchema";
 import { slugSchema } from "@/schemas/slugSchema";
 import { notFound } from "next/navigation";
@@ -36,23 +35,11 @@ export default async function PagePreview({
   // if it is only a draft during live preview for example.
   const page = (await fetchPage(slug, locale)) ?? { id: "none", image: "test", content: [{}] };
 
-  const uistrings = await fetchUiStrings(
-    [
-      "comment-form-title",
-      "comment-form-button",
-      "comment-form-email-helper",
-      "comment-form-email",
-      "comment-form-name",
-      "comment-form-comment",
-    ],
-    locale,
-  );
-
   return (
     <>
       <LivePreviewPage initialData={page} />
       <CommentList pageId={page.id} locale={locale} />
-      <CommentForm uistrings={uistrings} pageId={page.id} locale={locale} />
+      <CommentFormWrapper pageId={page.id} locale={locale} />
     </>
   );
 }

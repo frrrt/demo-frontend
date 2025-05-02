@@ -21,6 +21,6 @@ export async function fetchComments(pageId: string, locale: Locale) {
       sort: ["-createdAt"],
       limit: 100,
     },
-    { next: { tags: [`comments-page-${pageId}`] } },
+    { next: { tags: [`comments-page-${locale}-${pageId}`] } },
   );
 }

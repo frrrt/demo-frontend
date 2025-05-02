@@ -3,6 +3,7 @@ import { Box, Typography, Avatar, Divider, Paper, List, ListItem } from "@mui/ma
 import { AccessTime as AccessTimeIcon } from "@mui/icons-material";
 import { format } from "date-fns";
 import { fetchComments } from "@/fetch/fetchComments";
+import type { Locale } from "@/const/locales";
 
 const getInitials = (name: string) =>
   name
@@ -12,8 +13,8 @@ const getInitials = (name: string) =>
     .join("")
     .toUpperCase();
 
-export default async function CommentList({ pageId }: { pageId: string }) {
-  const comments = await fetchComments(pageId);
+export default async function CommentList({ pageId, locale }: { pageId: string; locale: Locale }) {
+  const comments = await fetchComments(pageId, locale);
 
   if (comments.length === 0) {
     return (

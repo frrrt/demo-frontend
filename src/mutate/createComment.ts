@@ -1,9 +1,11 @@
 "use server";
 import { CREATE_COMMENT_ERROR, CREATE_COMMENT_SUCCESS } from "@/components/page/Notification";
+import type { Locale } from "@/const/locales";
 import { mutateCollection } from "@/fetch/mutate";
 
 export default async function createComment(
-  pageId: string,
+  page: string,
+  locale: Locale,
   prevState: {
     message: string;
   },
@@ -14,7 +16,8 @@ export default async function createComment(
       commentText: (formData.get("commentText") || "").toString(),
       authorEmail: (formData.get("authorEmail") || "").toString(),
       authorName: (formData.get("authorName") || "").toString(),
-      page: pageId,
+      locale,
+      page,
     });
 
     return {

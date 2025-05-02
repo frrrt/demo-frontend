@@ -222,6 +222,7 @@ export interface Comment {
    * The page this comment is associated with
    */
   page: string | Page;
+  locale: "en-US" | "de-DE" | "fr-FR" | "ja-JP" | "ar-SA";
   /**
    * The name of the comment author
    */
@@ -429,6 +430,7 @@ export interface PagesSelect<T extends boolean = true> {
  */
 export interface CommentsSelect<T extends boolean = true> {
   page?: T;
+  locale?: T;
   authorName?: T;
   authorEmail?: T;
   commentText?: T;

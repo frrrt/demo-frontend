@@ -6,16 +6,19 @@ import { Page } from "@/payload-types";
 import { useActionState } from "react";
 import { SendButton } from "./SendButton";
 import Notification, { CREATE_COMMENT_SUCCESS } from "./Notification";
+import type { Locale } from "@/const/locales";
 
 export default function CommentForm({
   uistrings,
   pageId,
+  locale,
 }: {
   uistrings: Record<string, string>;
   pageId: Page["id"];
+  locale: Locale;
 }) {
-  const createCommentWithPageId = createComment.bind(null, pageId);
-  const [state, formAction] = useActionState(createCommentWithPageId, { message: "" });
+  const enhancedCreateComment = createComment.bind(null, pageId).bind(null, locale);
+  const [state, formAction] = useActionState(enhancedCreateComment, { message: "" });
 
   return (
     <Paper elevation={2} sx={{ p: 3, mb: 4, mt: 4 }}>

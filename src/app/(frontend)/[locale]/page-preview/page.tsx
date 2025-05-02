@@ -51,8 +51,8 @@ export default async function PagePreview({
   return (
     <>
       <LivePreviewPage initialData={page} />
-      <CommentList pageId={page.id} />
-      <CommentForm uistrings={uistrings} pageId={page.id} />
+      <CommentList pageId={page.id} locale={locale} />
+      <CommentForm uistrings={uistrings} pageId={page.id} locale={locale} />
     </>
   );
 }

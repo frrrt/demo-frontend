@@ -31,8 +31,8 @@ export default async function Page({ params }: { params: Promise<unknown> }) {
   return (
     <>
       <PageContent {...pageData} />
-      <CommentList pageId={slug} />
-      <CommentForm uistrings={uistrings} pageId={slug} />
+      <CommentList pageId={slug} locale={locale} />
+      <CommentForm uistrings={uistrings} pageId={slug} locale={locale} />
     </>
   );
 }

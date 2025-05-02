@@ -157,7 +157,7 @@ export default function convertToRichText(
 
       default: {
         return (
-          <Typography key={i} gutterBottom={firstLevel}>
+          <Typography key={i} component="div" gutterBottom={firstLevel}>
             {convertToRichText(node.children)}
           </Typography>
         );

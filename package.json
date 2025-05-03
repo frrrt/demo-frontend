@@ -11,7 +11,8 @@
     "sync:types": "tsx ./scripts/sync-types.ts",
     "prettier": "prettier --write **/*.{js,jsx,ts,tsx}",
     "prettier:check": "prettier --check **/*.{js,jsx,ts,tsx}",
-    "check:types": "tsc --noEmit"
+    "check:types": "tsc --noEmit",
+    "analyze": "cross-env ANALYZE=true pnpm build"
   },
   "dependencies": {
     "@emotion/cache": "^11.14.0",
@@ -21,6 +22,7 @@
     "@mui/material-nextjs": "^7.0.2",
     "@payloadcms/live-preview-react": "^3.35.1",
     "date-fns": "^4.1.0",
+    "intl-messageformat": "^10.7.16",
     "next": "15.3.1",
     "qs-esm": "^7.0.2",
     "react": "^19.1.0",
@@ -29,9 +31,11 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@next/bundle-analyzer": "^15.3.1",
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "cross-env": "^7.0.3",
     "eslint": "^9",
     "eslint-config-next": "15.3.1",
     "prettier": "^3.5.3",

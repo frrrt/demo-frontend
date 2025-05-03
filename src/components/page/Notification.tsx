@@ -1,8 +1,8 @@
 import React from "react";
-import { Paper, Alert, Typography, Box, Button } from "@mui/material";
+import { Paper, Alert, Typography, Box, Button, type AlertColor } from "@mui/material";
 
-export const CREATE_COMMENT_SUCCESS = "success"; // TODO: type as severity from MUI
-export const CREATE_COMMENT_ERROR = "error";
+export const CREATE_COMMENT_SUCCESS: AlertColor = "success";
+export const CREATE_COMMENT_ERROR: AlertColor = "error";
 
 export default function Notification({
   uistrings,
@@ -11,7 +11,7 @@ export default function Notification({
   message,
 }: {
   uistrings: Record<string, string>;
-  severity: typeof CREATE_COMMENT_SUCCESS | typeof CREATE_COMMENT_ERROR;
+  severity: AlertColor;
   title: string;
   message: string;
 }) {

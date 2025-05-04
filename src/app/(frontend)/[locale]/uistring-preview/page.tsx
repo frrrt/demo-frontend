@@ -23,13 +23,11 @@ export default async function UIStringPreview({
     ...(await searchParams),
   };
 
-  const result = safeParse(uiStringPreviewSchema, resolvedParams);
+  const { success, output } = safeParse(uiStringPreviewSchema, resolvedParams);
 
-  if (!result.success) {
+  if (!success) {
     notFound();
   }
-
-  const { locale, icuMessage } = result.output;
 
   return (
     <>
@@ -37,7 +35,7 @@ export default async function UIStringPreview({
         UI String Preview
       </Typography>
 
-      <ICUMessagePreviewer locale={locale} icuMessage={icuMessage} />
+      <ICUMessagePreviewer locale={output.locale} icuMessage={output.icuMessage} />
     </>
   );
 }

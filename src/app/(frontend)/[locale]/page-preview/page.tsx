@@ -26,13 +26,13 @@ export default async function PagePreview({
     ...(await searchParams),
   };
 
-  const result = safeParse(pagePreviewSchema, resolvedParams);
+  const { success, output } = safeParse(pagePreviewSchema, resolvedParams);
 
-  if (!result.success) {
+  if (!success) {
     notFound();
   }
 
-  const { slug, locale } = result.output;
+  const { slug, locale } = output;
 
   // This forwards an "empty" page object if the fetch is a 404, this is usefull
   // if it is only a draft during live preview for example.

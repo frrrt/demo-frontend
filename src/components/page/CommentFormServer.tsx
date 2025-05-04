@@ -4,7 +4,7 @@ import type { Page } from "@/payload-types";
 import CommentForm from "./CommentForm";
 import fetchUiStrings from "@/fetch/fetchUistrings";
 
-export default async function CommentFormWrapper({
+export default async function CommentFormServer({
   pageId,
   locale,
 }: {

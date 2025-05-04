@@ -21,7 +21,9 @@ export default function Notification({
         <Typography variant="subtitle1" fontWeight="bold">
           {title}
         </Typography>
+
         <Typography sx={{ mt: 1, mb: 2 }}>{message}</Typography>
+
         <Box>
           <Button variant="outlined" size="small" onClick={() => window.location.reload()}>
             {uistrings["comment-form-reload"]}

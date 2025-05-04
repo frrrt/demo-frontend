@@ -1,7 +1,7 @@
 import { queryById } from "./query";
 
 export async function fetchPage(slug: string, locale: string) {
-  const response = await queryById(
+  return await queryById(
     "pages",
     slug,
     {
@@ -23,6 +23,4 @@ export async function fetchPage(slug: string, locale: string) {
     },
     { next: { tags: [`page-${slug}`] } },
   );
-
-  return response;
 }

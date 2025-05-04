@@ -4,7 +4,7 @@ import { pageParamsSchema } from "@/schemas/pageParamsSchema";
 import { fetchPage } from "@/fetch/fetchPage";
 import { notFound } from "next/navigation";
 import CommentList from "./CommentList";
-import CommentFormWrapper from "./CommentFormWrapper";
+import CommentFormServer from "./CommentFormServer";
 
 export default async function Page({ params }: { params: Promise<unknown> }) {
   const { slug, locale } = parse(pageParamsSchema, await params);
@@ -19,7 +19,7 @@ export default async function Page({ params }: { params: Promise<unknown> }) {
     <>
       <PageContent {...pageData} />
       <CommentList pageId={slug} locale={locale} />
-      <CommentFormWrapper pageId={slug} locale={locale} />
+      <CommentFormServer pageId={slug} locale={locale} />
     </>
   );
 }

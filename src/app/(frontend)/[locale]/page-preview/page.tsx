@@ -1,4 +1,4 @@
-import CommentFormWrapper from "@/components/page/CommentFormWrapper";
+import CommentFormServer from "@/components/page/CommentFormServer";
 import CommentList from "@/components/page/CommentList";
 import { LivePreviewPage } from "@/components/page/LivePreviewPage";
 import { fetchPage } from "@/fetch/fetchPage";
@@ -42,7 +42,7 @@ export default async function PagePreview({
     <>
       <LivePreviewPage initialData={page} />
       <CommentList pageId={page.id} locale={locale} />
-      <CommentFormWrapper pageId={page.id} locale={locale} />
+      <CommentFormServer pageId={page.id} locale={locale} />
     </>
   );
 }

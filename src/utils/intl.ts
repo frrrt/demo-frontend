@@ -4,13 +4,17 @@ import IntlMessageFormat from "intl-messageformat";
 const formatterCache = new Map();
 
 export function formatMessage(message: string, locale: Locale, values = {}) {
-  const cacheKey = `${message}_${locale}`;
+  try {
+    const cacheKey = `${message}_${locale}`;
 
-  let formatter = formatterCache.get(cacheKey);
-  if (!formatter) {
-    formatter = new IntlMessageFormat(message, locale);
-    formatterCache.set(cacheKey, formatter);
+    let formatter = formatterCache.get(cacheKey);
+    if (!formatter) {
+      formatter = new IntlMessageFormat(message, locale);
+      formatterCache.set(cacheKey, formatter);
+    }
+
+    return formatter.format(values);
+  } catch {
+    return null;
   }
-
-  return formatter.format(values);
 }

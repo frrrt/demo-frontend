@@ -1,11 +1,12 @@
 import ICUMessagePreviewer from "@/components/page/ICUMessagePreviewer";
 import { localeSchema } from "@/schemas/localeSchema";
+import { tokenSchema } from "@/schemas/tokenSchema";
 import { Typography } from "@mui/material";
 import { notFound } from "next/navigation";
-import { object, parse, string } from "valibot";
+import { object, safeParse, string } from "valibot";
 
 const uiStringPreviewSchema = object({
-  token: string(),
+  token: tokenSchema,
   locale: localeSchema,
   icuMessage: string(),
 });
@@ -22,11 +23,13 @@ export default async function UIStringPreview({
     ...(await searchParams),
   };
 
-  const { token, locale, icuMessage } = parse(uiStringPreviewSchema, resolvedParams);
+  const result = safeParse(uiStringPreviewSchema, resolvedParams);
 
-  if (token !== process.env.PREVIEW_TOKEN) {
+  if (!result.success) {
     notFound();
   }
+
+  const { locale, icuMessage } = result.output;
 
   return (
     <>
@@ -34,7 +37,7 @@ export default async function UIStringPreview({
         UI String Preview
       </Typography>
 
-      <ICUMessagePreviewer icuMessage={icuMessage} locale={locale} />
+      <ICUMessagePreviewer locale={locale} icuMessage={icuMessage} />
     </>
   );
 }

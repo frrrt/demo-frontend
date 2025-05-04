@@ -4,11 +4,12 @@ import { LivePreviewPage } from "@/components/page/LivePreviewPage";
 import { fetchPage } from "@/fetch/fetchPage";
 import { localeSchema } from "@/schemas/localeSchema";
 import { slugSchema } from "@/schemas/slugSchema";
+import { tokenSchema } from "@/schemas/tokenSchema";
 import { notFound } from "next/navigation";
-import { object, parse, string } from "valibot";
+import { object, safeParse } from "valibot";
 
 const pagePreviewSchema = object({
-  token: string(),
+  token: tokenSchema,
   slug: slugSchema,
   locale: localeSchema,
 });
@@ -25,11 +26,13 @@ export default async function PagePreview({
     ...(await searchParams),
   };
 
-  const { token, slug, locale } = parse(pagePreviewSchema, resolvedParams);
+  const result = safeParse(pagePreviewSchema, resolvedParams);
 
-  if (token !== process.env.PREVIEW_TOKEN) {
+  if (!result.success) {
     notFound();
   }
+
+  const { slug, locale } = result.output;
 
   // This forwards an "empty" page object if the fetch is a 404, this is usefull
   // if it is only a draft during live preview for example.

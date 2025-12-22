@@ -16,31 +16,31 @@
   },
   "dependencies": {
     "@emotion/cache": "^11.14.0",
-    "@emotion/styled": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
     "@formatjs/icu-messageformat-parser": "^2.11.2",
-    "@mui/icons-material": "^7.0.2",
-    "@mui/material": "^7.0.2",
-    "@mui/material-nextjs": "^7.0.2",
-    "@payloadcms/live-preview-react": "^3.35.1",
+    "@mui/icons-material": "^7.3.6",
+    "@mui/material": "^7.3.6",
+    "@mui/material-nextjs": "^7.3.6",
+    "@payloadcms/live-preview-react": "^3.69.0",
     "date-fns": "^4.1.0",
     "intl-messageformat": "^10.7.16",
     "next": "15.3.1",
     "qs-esm": "^7.0.2",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "valibot": "1.0.0"
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "valibot": "1.2.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@next/bundle-analyzer": "^15.3.1",
-    "@types/node": "^22",
+    "@types/node": "^25",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "cross-env": "^7.0.3",
+    "cross-env": "^10.1.0",
     "eslint": "^9",
     "eslint-config-next": "15.3.1",
-    "prettier": "^3.5.3",
-    "tsx": "^4.19.3",
+    "prettier": "^3.7.4",
+    "tsx": "^4.21.0",
     "typescript": "^5"
   }
 }

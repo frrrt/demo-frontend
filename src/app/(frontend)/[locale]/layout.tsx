@@ -3,7 +3,7 @@ import { Roboto } from "next/font/google";
 import { ThemeProvider } from "@mui/material/styles";
 import { AppBar, Typography, Container, Box } from "@mui/material";
 import Menu from "@/components/Menu";
-import Link from "next/link";
+// import Link from "next/link";
 import type { Locale } from "@/const/locales";
 import ToggleLanguageButton from "@/components/ToggleLanguageButton";
 import fetchUiStrings from "@/fetch/fetchUistrings";
@@ -50,7 +50,7 @@ export default async function RootLayout({
               >
                 <Typography
                   variant="h6"
-                  component={Link}
+                  component="a"
                   href={`/${locale}`}
                   sx={{ textDecoration: "none", color: "inherit" }}
                 >

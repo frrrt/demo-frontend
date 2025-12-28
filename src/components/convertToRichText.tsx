@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import { Box, Link as MuiLink, Typography } from "@mui/material";
 import Link from "next/link";
 
